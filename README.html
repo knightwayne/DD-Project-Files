@@ -30,7 +30,8 @@ stations and being able to view data along a large time-zone.</p>
     </li>
     <br>
     <li><b>Merging of Different Data Sets</b><br>
-        The merge python code, as worked on during last summer, will need modification, as now we are merging data-sets over an added parameter - time.
+        The merge python code, as worked on during last summer, will need heavy modification, as now we are merging data-sets over an added parameter - time.
+        Hence it is suggested that a new merging algorithm is developed from the existing work, to add new parameters.
     </li>
     <br>
     <li><b>Time Scrolling</b><br>
@@ -41,3 +42,63 @@ stations and being able to view data along a large time-zone.</p>
         A new data-format, offset variable is added to help improve the robustness of the webpage, and increase user flexibility.
     </li>
 </p>
+
+
+<h3>Project Details</h3>
+
+<li>
+    <b>Obtaining SDR file from DSGN Station and parallely processing data</b><br><br>
+    <img src="./images/ParallelProcessing.png" width="60%">
+    <br><br>
+    This image clarifies the parallel processing of multiple singals from record stations, and storing it in JSON format in **Collection database.
+    This is done using **misc.py.
+    <br>
+</li><br>
+
+<li>
+    <b>Algorithm for merging and syncing of processed data</b><br><br>
+    For simplicity, we assume we have data from 2 satellites only.
+    <br><br>For satellite-1:<br>
+    Let us say the first SDR file recieved has data at timestamp 't1'.<br>
+    Eg. t=0000hrs<br>
+    It will now periodically capture data after every 'X1' time.<br>
+    Eg. If X1=30 minutes, we have next snapshots at 0030hrs, 0100hrs, 0130hrs, and so on. 
+    
+    <br><br>For satellite-2:<br>
+    Let us say the first SDR file recieved has data at timestamp 't2'.<br>
+    Eg. t=0010hrs<br>
+    It will now periodically capture data after every 'X2' time.<br>
+    Eg. If X2=30 minutes, we have next snapshots at 0040hrs, 0110hrs, 0140hrs, and so on. 
+
+    <br><br>We can't merge data from satellite-1 at 0000hrs, with 0010hrs, without making any changes.The proposed solution for this is - 
+    <br><br>For every fixed time period, let us say T' time, a satellite would generate only 1 image which will show the average representation of
+    data over that time period. Multiple and no signals would be implemented during the coding part of the idea.
+    <br>
+    Eg. T' = 15 minutes.<br>
+    Therefore, the map will show data at every 15 minutes, i.e. 0015hrs, 0030hrs, 0045hrs, and so on.
+    Here, <br>
+    0015hrs - Merging of satellite-1 (0000hrs data), and satellite-2 (0010hrs data)<br>
+    0030hrs - Merging of satellite-1 (0030hrs data), and satellite-2 (0010hrs data)<br>
+    0045hrs - Merging of satellite-1 (0030hrs data), and satellite-2 (0040hrs data)<br>
+
+    The value of T' would be kept to provide very accurate representation of data, and can be externally configured by user.
+    <br>
+</li><br>
+
+<li>
+    <b>Obtaining SDR file from DSGN Station and parallely processing data</b><br><br>
+    <img src="./images/ParallelProcessing.png" width="60%">
+    <br><br>
+    This image clarifies the parallel processing of multiple singals from record stations, and storing it in JSON format in **Collection database.
+    This is done using **misc.py.
+    <br>
+</li><br>
+
+<li>
+    <b>Obtaining SDR file from DSGN Station and parallely processing data</b><br><br>
+    <img src="./images/ParallelProcessing.png" width="60%">
+    <br><br>
+    This image clarifies the parallel processing of multiple singals from record stations, and storing it in JSON format in **Collection database.
+    This is done using **misc.py.
+    <br>
+</li><br>
