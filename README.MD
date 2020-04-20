@@ -58,20 +58,46 @@ The following issues are faced while rendering data from multiple record station
     It will now periodically capture data after every 'X2' time.  
     Eg. If X2=30 minutes, we have next snapshots at 0040hrs, 0110hrs, 0140hrs, and so on.  
       
-    We can't merge data from satellite-1 at 0000hrs, with 0010hrs, without making any changes.The proposed solution for this is -  
+    We can't merge data from satellite-1 at any point of time, with satellite-2's data at any other point of time. We need a proper way of matching, and syncing signals to create an effective map. The proposed solution for this is -  
       
-    For every fixed time period, let us say T' time, a satellite would generate only 1 image which will show the average representation of data over that time period. Multiple and no signals would be implemented during the coding part of the idea.  
-    Eg. T' = 15 minutes.  
+    For every fixed time period, let us say α time, a satellite would generate only 1 image which will show the average representation of data over that time period. (Multiple and no signals would be implemented during the coding part of the idea.)  
+    Eg. α = 15 minutes.  
     Therefore, the map will show data at every 15 minutes, i.e. 0015hrs, 0030hrs, 0045hrs, and so on. Here,  
     0015hrs - Merging of satellite-1 (0000hrs data), and satellite-2 (0010hrs data)  
     0030hrs - Merging of satellite-1 (0030hrs data), and satellite-2 (0010hrs data)  
     0045hrs - Merging of satellite-1 (0030hrs data), and satellite-2 (0040hrs data)  
-    The value of T' would be kept to provide very accurate representation of data, and can be externally configured by user.  
+    The value of α would be kept to provide very accurate representation of data, and can be externally configured by user.  
     
   
 *   **DataBase Schema & Merging of Database**  
       
+    Till here, we can interpret that for which signals would be used to merge, and georeference to generate the map. Now we move to the database schema and representation.  
     For this purpose, we would be using a de-centralised NoSQL database, like MongoDB to efficiently perform the CRUD operations.  
+      
+    ![](./images/DistributedDatabase.png)  
+      
+    
+    Consisting of 1 Central Database, and many Collection Databases.
+    
+      
+      
+    ![](./images/CentralDatabase.png)  
+      
+    
+    Here we are representing n-Days data in the Main Database.  
+    α is our decided interval, at which we would be rendering data in a day.  
+    Therefore, data is represented at the following intervals -  
+    T’ , T’+α, T’+2α …..T’+yα , where y=(24/α) to represent total blocks in a day.
+    
+      
+      
+    ![](./images/CollectionDatabase.png)  
+      
+    
+    Each T' represents a snapshot of the map at a particular time, made by merging all possible satellite signal data, during that 'α' period.
+    
+      
+      
     
   
 *   **Time Scrolling**  
