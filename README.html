@@ -1,0 +1,80 @@
+<h1>Direct Demod - Automatic NOAA Map and Globe Projection</h1>
+<h2>Combining Maps from Multiple DSGN Stations and Scrolling through Time</h2>
+
+<h3>This project is for adding supplement files for the following <a href="https://docs.google.com/document/d/1dH36BWyLU2bjtMudt8bBVoROjMZty47-XSv6j485FmY/edit?usp=sharing">proposal</a>.</h3>
+<h3>Contents</h3>
+<p>This project aims to improve the current rendering of map and globe from DirectDemod python libraries, along with combining maps from different 
+stations and being able to view data along a large time-zone.</p>
+
+<p>
+    The following issues are faced while rendering data from multiple record stations, combining and syncing them, along with rendering them -
+    <li><b>Large Data Set</b><br>
+        The data set to be represented for this project is very large. Having data from many satellites, and having many captures of data from each
+        satellite per day, leads us to the problem of maintaining and handling large data sets.
+        We have to cover obtaining data from DSGN stations, and their parallel processing using python script.
+    </li>
+    <br>
+    <li><b>Efficient Data Retrieval</b><br>
+        Efficient Data Retrieval from data-bases is also important for faster rendering of data into web-page. 
+        We have to design our database schema in such format, that we have both write and retieve operation as fast as possible, i.e. 
+        <br>1. when processing data, we can store it efficiently
+        <br>2. accesing data for rendering
+        <br>
+        For this, we will use the concept of de-centralised NoSQL database. The schema is discussed below. 
+    </li>
+    <br>
+    <li><b>Algorithm for merging and syncing of processed data</b><br>
+        As we are showing data through time, we will collect the data, over a large range of days, from many satellites.There is a good possibility that
+        data from the satellites are captured at differnet timestamps, and we need to devise an algorithm, to sync and merge the data captured at
+        different time.
+    </li>
+    <br>
+    <li><b>Merging of Different Data Sets</b><br>
+        The merge python code, as worked on during last summer, will need modification, as now we are merging data-sets over an added parameter - time.
+    </li>
+    <br>
+    <li><b>Time Scrolling</b><br>
+        Discussed as .gif format below.
+    </li>
+    <br>
+    <li><b>Increase Robustness</b><br>
+        A new data-format, offset variable is added to help improve the robustness of the webpage, and increase user flexibility.
+    </li>
+</p>
+
+
+
+
+
+
+
+
+
+
+<!--
+    <p>This demonstrates <a href="https://github.com/domchristie/turndown">turndown</a> – an HTML to Markdown converter in JavaScript.</p>
+
+    <h2>Usage</h2>
+
+    <pre><code class="language-js">var turndownService = new TurndownService()
+    console.log(
+    turndownService.turndown('&lt;h1&gt;Hello world&lt;/h1&gt;')
+    )</code></pre>
+
+    <hr />
+
+    <p>It aims to be <a href="http://commonmark.org/">CommonMark</a>
+    compliant, and includes options to style the output. These options include:</p>
+
+    <ul>
+    <li>headingStyle (setext or atx)</li>
+    <li>horizontalRule (*, -, or _)</li>
+    <li>bullet (*, -, or +)</li>
+    <li>codeBlockStyle (indented or fenced)</li>
+    <li>fence (` or ~)</li>
+    <li>emDelimiter (_ or *)</li>
+    <li>strongDelimiter (** or __)</li>
+    <li>linkStyle (inlined or referenced)</li>
+    <li>linkReferenceStyle (full, collapsed, or shortcut)</li>
+    </ul>
+-->
